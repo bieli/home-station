@@ -1,0 +1,1 @@
+/home/bieli/Desktop/_priv/projects/home-station/HomeStation/message/DataMessage_pb2.py

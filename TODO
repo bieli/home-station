@@ -1,0 +1,4 @@
+
+- example server and client
+    -- http://stackoverflow.com/questions/18730942/why-is-my-protobuf-message-being-truncated-only-when-sent-from-a-windows-box-to
+    -- http://stackoverflow.com/questions/27466135/python-gevent-websocket-client-getting-error-decodeerror-truncated-message-fo

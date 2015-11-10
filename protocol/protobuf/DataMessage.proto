@@ -1,0 +1,29 @@
+option py_generic_services = true;
+option optimize_for = SPEED;
+option java_package = "net.bieli.HomeStation.protocol.protobuf.DataMessage";
+
+package ProtobufDataMessage;
+
+message DataMessage {
+  required string stationId = 1;
+  required string apiKey = 2;
+  required string token = 3;
+  required uint64 timestamp = 4;
+  repeated DataItem dataItems = 5;
+
+  enum Alert {
+    CRITICAL_HIGH = 3;
+    TOO_HIGH = 2;
+    HIGH = 1;
+    NO_ALERT = 0;
+    LOW = -1;
+    TOO_LOW = -2;
+    CRITICAL_LOW = -3;
+  }
+
+  message DataItem {
+    optional uint64 parameterId = 1;
+    optional float value = 2;
+    optional Alert alert = 3 [default = NO_ALERT];
+  }
+}
