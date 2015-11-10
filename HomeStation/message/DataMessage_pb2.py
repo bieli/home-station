@@ -18,7 +18,7 @@ _sym_db = _symbol_database.Default()
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='protocol/protobuf/DataMessage.proto',
   package='ProtobufDataMessage',
-  serialized_pb=_b('\n#protocol/protobuf/DataMessage.proto\x12\x13ProtobufDataMessage\"\x87\x03\n\x0b\x44\x61taMessage\x12\x11\n\tstationId\x18\x01 \x02(\t\x12\x0e\n\x06\x61piKey\x18\x02 \x02(\t\x12\r\n\x05token\x18\x03 \x02(\t\x12\x11\n\ttimestamp\x18\x04 \x02(\x04\x12<\n\tdataItems\x18\x05 \x03(\x0b\x32).ProtobufDataMessage.DataMessage.DataItem\x1ao\n\x08\x44\x61taItem\x12\x13\n\x0bparameterId\x18\x01 \x01(\x04\x12\r\n\x05value\x18\x02 \x01(\x02\x12?\n\x05\x61lert\x18\x03 \x01(\x0e\x32&.ProtobufDataMessage.DataMessage.Alert:\x08NO_ALERT\"\x83\x01\n\x05\x41lert\x12\x11\n\rCRITICAL_HIGH\x10\x03\x12\x0c\n\x08TOO_HIGH\x10\x02\x12\x08\n\x04HIGH\x10\x01\x12\x0c\n\x08NO_ALERT\x10\x00\x12\x10\n\x03LOW\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x14\n\x07TOO_LOW\x10\xfe\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x19\n\x0c\x43RITICAL_LOW\x10\xfd\xff\xff\xff\xff\xff\xff\xff\xff\x01\x42:\n3net.bieli.HomeStation.protocol.protobuf.DataMessageH\x01\x90\x01\x01')
+  serialized_pb=_b('\n#protocol/protobuf/DataMessage.proto\x12\x13ProtobufDataMessage\"\x87\x03\n\x0b\x44\x61taMessage\x12\x11\n\tstationId\x18\x01 \x02(\t\x12\x0e\n\x06\x61piKey\x18\x02 \x02(\t\x12\r\n\x05token\x18\x03 \x02(\t\x12\x11\n\ttimestamp\x18\x04 \x02(\r\x12<\n\tdataItems\x18\x05 \x03(\x0b\x32).ProtobufDataMessage.DataMessage.DataItem\x1ao\n\x08\x44\x61taItem\x12\x13\n\x0bparameterId\x18\x01 \x02(\r\x12\r\n\x05value\x18\x02 \x02(\x02\x12?\n\x05\x61lert\x18\x03 \x01(\x0e\x32&.ProtobufDataMessage.DataMessage.Alert:\x08NO_ALERT\"\x83\x01\n\x05\x41lert\x12\x11\n\rCRITICAL_HIGH\x10\x03\x12\x0c\n\x08TOO_HIGH\x10\x02\x12\x08\n\x04HIGH\x10\x01\x12\x0c\n\x08NO_ALERT\x10\x00\x12\x10\n\x03LOW\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x14\n\x07TOO_LOW\x10\xfe\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x19\n\x0c\x43RITICAL_LOW\x10\xfd\xff\xff\xff\xff\xff\xff\xff\xff\x01\x42:\n3net.bieli.HomeStation.protocol.protobuf.DataMessageH\x01\x90\x01\x01')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -76,14 +76,14 @@ _DATAMESSAGE_DATAITEM = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='parameterId', full_name='ProtobufDataMessage.DataMessage.DataItem.parameterId', index=0,
-      number=1, type=4, cpp_type=4, label=1,
+      number=1, type=13, cpp_type=3, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='value', full_name='ProtobufDataMessage.DataMessage.DataItem.value', index=1,
-      number=2, type=2, cpp_type=6, label=1,
+      number=2, type=2, cpp_type=6, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -140,7 +140,7 @@ _DATAMESSAGE = _descriptor.Descriptor(
       options=None),
     _descriptor.FieldDescriptor(
       name='timestamp', full_name='ProtobufDataMessage.DataMessage.timestamp', index=3,
-      number=4, type=4, cpp_type=4, label=2,
+      number=4, type=13, cpp_type=3, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,

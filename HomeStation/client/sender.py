@@ -3,7 +3,6 @@ import hashlib
 import time
 
 from HomeStation.message import DataMessage_pb2
-from HomeStation.tools.tokenizer import Tokenizer
 
 
 class Sender:
@@ -25,25 +24,22 @@ class Sender:
         #
         # data_message.dataItems.extend(data_items)
 
-        if len(data):
-            for data_item in data:
-                data_message.dataItems.add(parameterId=data_item['parameterId'], value=data_item['value'])
-        else:
-            data_message.dataItems.add()
+        for data_item in data:
+            data_message.dataItems.add(parameterId=data_item['parameterId'], value=data_item['value'])
 
-        # required uint64 dataItemsCount = 6;
         # data_message.dataItemsCount = len(data)
 
-        tok = Tokenizer()
+        token = hashlib.sha256()
+        token.update(str(data_message.stationId) + str(data_message.apiKey) + str(data_message.timestamp))
+        token = token.hexdigest()
+        print "token: ", token
 
-        data_message.token = str(tok.prepare_token(station_id, api_key, timestamp))
+        data_message.token = str(token)
 
         # Write the new address book back to disk.
         f = open("/tmp/test.pb2.bin", "wb")
         f.write(data_message.SerializeToString())
         f.close()
-
-        print data_message
 
         # from test_msg_pb2 import test_msg
         import socket
@@ -55,17 +51,15 @@ class Sender:
         data = data_message
 
         num_retransmits = 0
-        while num_retransmits < 5:  # send the same message 5 times
-            num_retransmits += 1
+        while (num_retransmits < 5):  # send the same message 5 times
+            num_retransmits = num_retransmits + 1
 
             s = data.SerializeToString()
 
-            data_len = len(s)
-            print "data_len: ", data_len
-            total_len = 4 + data_len
-            print "total_len: ", total_len
-            pack1 = struct.pack('>I', total_len)  # the first part of the message is length
+            totallen = 4 + len(s)
+            print "totallen: ", totallen
+            pack1 = struct.pack('>I', totallen)  # the first part of the message is length
             client_socket.sendall(pack1 + s)
 
             print "[client] stationId: ", data.stationId, " timestamp: ", data.timestamp
-            time.sleep(1)
+            # time.sleep(2)

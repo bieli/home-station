@@ -1,5 +1,8 @@
 import socket
 import struct
+
+import time
+
 from HomeStation.message import DataMessage_pb2
 from HomeStation.tools.tokenizer import Tokenizer
 
@@ -10,18 +13,18 @@ class Collector:
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         server_socket.bind(address)
 
+        m = 0
+        t0 = int(time.time())
         while 1:
             print "Listening"
 
             total_len = server_socket.recv(4)
             print "total_len: ", total_len
-            totallen_recv = struct.unpack('>I', total_len)
-            print "totallen_recv: ", totallen_recv
-            totallen_recv = totallen_recv[0]
-            print "totallen_recv[0]: ", str(int(totallen_recv))
+            totallen_recv = struct.unpack('>I', total_len)[0]
+            print "totallen_recv[0]: ", totallen_recv
             messagelen = totallen_recv - 4
             print "messagelen: ", messagelen
-            message = server_socket.recv(messagelen)
+            message = server_socket.recv(messagelen * 2)
 
             data_message = DataMessage_pb2.DataMessage()
             data_message.ParseFromString(message)
@@ -37,3 +40,9 @@ class Collector:
                 print "token OK :-)"
             else:
                 print "token WRONG !!!"
+
+            m += 1
+            t = int(time.time()) - t0
+            print "[INFO] #### t [s]: ", t, "m [get data msg count]: ", str(int(m))
+            # if t >= t0 + 1:
+            #     break
