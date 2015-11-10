@@ -1,6 +1,7 @@
-HOME STATION - client and server data measurment with PROTOBUF protocol
+HOME STATION - client and server data measurement with PROTOBUF protocol
 -----------------------------------------------------------------------
 
+Prototype code for internal web services data messages in home automation, scada and things like that solutions.
 
 
 Example test runs:
