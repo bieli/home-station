@@ -7,10 +7,10 @@ Prototype code for internal web services data messages in home automation, scada
 Example test runs:
 -------------------
 
-Run on first console client sender test:
+Run on first console client sender test proccess:
 
+```
 $ python sender_test.py
-
 
 token:  222637d764dc605239118043203d6a5a50990354823dee19f4336650df7ff796
 totallen:  127
@@ -23,10 +23,11 @@ totallen:  127
 [client] stationId:  0283429873498724283  timestamp:  1447198307
 totallen:  127
 [client] stationId:  0283429873498724283  timestamp:  1447198307
+```
 
+and try run on another console run server collector consumer proccess:
 
-and on another console run servere collector consumer:
-
+```
 $ python collector_test.py
 
 
@@ -50,4 +51,8 @@ dataItems {
 
 token OK :-)
 [INFO] #### t [s]:  29 m [get data msg count]:  45374
+```
 
+Wow, on local machine with simple sockets server solution performance: *~1.5 k recv messages per second* (45374 [ recv messages] / 29 [s])
+
+Good enough for home automation solution.

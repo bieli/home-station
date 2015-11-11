@@ -8,8 +8,10 @@ from HomeStation.tools.tokenizer import Tokenizer
 
 
 class Collector:
-    def __init__(self):
-        address = ('localhost', 6005)
+    def __init__(self, host='localhost', port=6005):
+        self.host = host
+        self.port = port
+        address = (self.host, self.port)
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         server_socket.bind(address)
 

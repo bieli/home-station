@@ -6,8 +6,9 @@ from HomeStation.message import DataMessage_pb2
 
 
 class Sender:
-    def __init__(self):
-        pass
+    def __init__(self, host='localhost', port=6005):
+        self.host = host
+        self.port = port
 
     def send_data(self, station_id, api_key, timestamp, data, alerts=None):
         data_message = DataMessage_pb2.DataMessage()
@@ -45,7 +46,7 @@ class Sender:
         import socket
         import struct
 
-        address = ('localhost', 6005)
+        address = (self.host, self.port)
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         client_socket.connect(address)
         data = data_message
