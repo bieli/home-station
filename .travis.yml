@@ -12,7 +12,7 @@ python:
 #before_script:
 #  - pip install .
 
-script: ./tools/run_unit_tests.sh
+script: python -m unittest discover ./HomeStation/tests/ "*Test.py"
 
 notifications:
   email: false
