@@ -1,10 +1,28 @@
+# HOME STATION [![Build Status](https://travis-ci.org/bieli/home-station.png)](https://travis-ci.org/bieli/home-station) #
+===================
+
 HOME STATION - client and server data measurement with PROTOBUF protocol
------------------------------------------------------------------------
-
-Prototype code for internal web services data messages in home automation, scada and things like that solutions.
 
 
-Example test runs:
+What is this ?
+--------------
+Prototype code for internal web services data messages in home automation, SCADA and things like that solutions.
+
+
+Implementation TODO list
+-------------
+ - [x] git ignore
+ - [ ] travis CI
+ - [x] protocol definition and generation script in standard PROTOBUF way
+ - [ ] unit tests
+ - [x] runnable code prototype PoC
+ - [x] simple socket test client/server example based on PROTO
+ - [ ] socket client/server with exceptions and all error handling
+ - [ ] functional test automation
+ - [ ] practical implementation in home automation (temperature and humidity measurement)
+
+
+Example first PRE-ALPHA test runs:
 -------------------
 
 Run on first console client sender test proccess:

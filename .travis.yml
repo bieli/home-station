@@ -1,0 +1,18 @@
+sudo: false
+
+language: python
+
+python:
+ - "2.6"
+ - "2.7"
+ - "pypy"
+
+#install: pip install .
+
+#before_script:
+#  - pip install .
+
+script: ./tools/run_unit_tests.sh
+
+notifications:
+  email: false
