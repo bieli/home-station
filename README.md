@@ -1,4 +1,4 @@
-# HOME STATION [![Build Status](https://travis-ci.org/bieli/home-station.png)](https://travis-ci.org/bieli/home-station) #
+# HOME STATION [![Build Status](https://travis-ci.org/bieli/home-station.png)](https://travis-ci.org/bieli/home-station) [![Coverage](https://coveralls.io/repos/bieli/home-station/badge.png?branch=master)](https://coveralls.io/r/bieli/home-station?branch=master) #
 ===================
 
 HOME STATION - client and server data measurement with PROTOBUF protocol
