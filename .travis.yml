@@ -6,9 +6,15 @@ python:
  - "3.4"
  - "3.5"
 
-install: pip install -r requirements.txt
+install:
+ -pip install -r requirements.txt
 
-script: python -m unittest discover ./HomeStation/tests/ "*Test.py"
+script:
+ - coverage run HomeStation/*/*.py 
+ - python -m unittest discover ./HomeStation/tests/ "*Test.py"
+
+after_success:
+  coveralls
 
 notifications:
   email: false
