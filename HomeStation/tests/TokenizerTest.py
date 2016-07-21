@@ -36,13 +36,13 @@ class TokenizerTest(unittest.TestCase):
 
     def test_should_no_validate_token_with_wrong_token(self):
         # given
-        validated_token = "wrong_token"
+        wrong_token = "wrong_token"
 
         data_message = DataMessage_pb2.DataMessage()
-        data_message.token = validated_token
+        data_message.token = "validated_token"
 
         # when
-        result = self.unit.validate_token(data_message, validated_token)
+        result = self.unit.validate_token(data_message, wrong_token)
 
         # then
         self.assertFalse(result)
