@@ -3,6 +3,7 @@ import hashlib
 import time
 
 from HomeStation.message import DataMessage_pb2
+from HomeStation.tools.tokenizer import Tokenizer
 
 
 class Sender:
@@ -30,17 +31,17 @@ class Sender:
 
         # data_message.dataItemsCount = len(data)
 
-        token = hashlib.sha256()
-        token.update(str(data_message.stationId) + str(data_message.apiKey) + str(data_message.timestamp))
-        token = token.hexdigest()
-        print "token: ", token
+        tok = Tokenizer()
+        token = tok.prepare_token(data_message.stationId, data_message.apiKey, data_message.timestamp)
+
+        print("token: ", token)
 
         data_message.token = str(token)
 
         # Write the new address book back to disk.
-        f = open("/tmp/test.pb2.bin", "wb")
-        f.write(data_message.SerializeToString())
-        f.close()
+        #f = open("/tmp/test.pb2.bin", "wb")
+        #f.write(data_message.SerializeToString())
+        #f.close()
 
         # from test_msg_pb2 import test_msg
         import socket
@@ -55,12 +56,23 @@ class Sender:
         while (num_retransmits < 5):  # send the same message 5 times
             num_retransmits = num_retransmits + 1
 
-            s = data.SerializeToString()
+            serialized_message = data.SerializeToString()
+            # DEBUG
+            #if tok.validate_token(data_message, token):
+            #    print("token OK :-)")
+            #else:
+            #    print("token WRONG !!!")
 
-            totallen = 4 + len(s)
-            print "totallen: ", totallen
+            print("serialized_message: ", len(serialized_message))
+            totallen = 4 + len(serialized_message)
+            print("totallen: ", totallen)
             pack1 = struct.pack('>I', totallen)  # the first part of the message is length
-            client_socket.sendall(pack1 + s)
+            client_socket.sendall(pack1 + serialized_message)
 
-            print "[client] stationId: ", data.stationId, " timestamp: ", data.timestamp
+            # DEBUG
+            # with open('send.test.packet.1', 'wb') as pack:
+            #     pack.write(pack1 + serialized_message)
+
+            print("[client] stationId: ", data.stationId, " timestamp: ", data.timestamp)
             # time.sleep(2)
+

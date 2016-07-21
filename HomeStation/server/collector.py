@@ -18,33 +18,38 @@ class Collector:
         m = 0
         t0 = int(time.time())
         while 1:
-            print "Listening"
+            print("[HOME-STATION] Collectorr listening for measurement data...")
 
             total_len = server_socket.recv(4)
-            print "total_len: ", total_len
+            print("total_len: ", total_len)
             totallen_recv = struct.unpack('>I', total_len)[0]
-            print "totallen_recv[0]: ", totallen_recv
+            print("totallen_recv[0]: ", totallen_recv)
             messagelen = totallen_recv - 4
-            print "messagelen: ", messagelen
+            print("messagelen: ", messagelen)
             message = server_socket.recv(messagelen * 2)
 
-            data_message = DataMessage_pb2.DataMessage()
-            data_message.ParseFromString(message)
+            # DEBUG
+            # with open('coll.test.packet.1', 'wb') as pack:
+            #     pack.write(message)
 
-            print "[server] param1:", data_message.stationId, "param2:", data_message.timestamp
+            recv_data_message = DataMessage_pb2.DataMessage()
+            recv_data_message.ParseFromString(message)
 
-            print data_message
+            #print("[server] param1:", recv_data_message.stationId, "param2:", recv_data_message.timestamp)
+
+            print(str(recv_data_message))
 
             tok = Tokenizer()
-            token = tok.prepare_token(data_message.stationId, data_message.apiKey, data_message.timestamp)
+            recv_token = tok.prepare_token(recv_data_message.stationId, recv_data_message.apiKey, recv_data_message.timestamp)
 
-            if tok.validate_token(data_message, token):
-                print "token OK :-)"
+            if tok.validate_token(recv_data_message, recv_token):
+                print("token OK :-)")
             else:
-                print "token WRONG !!!"
+                print("token WRONG !!!")
 
             m += 1
             t = int(time.time()) - t0
-            print "[INFO] #### t [s]: ", t, "m [get data msg count]: ", str(int(m))
+            print("[INFO] #### t [s]: ", t, "m [get data msg count]: ", str(int(m)))
             # if t >= t0 + 1:
             #     break
+

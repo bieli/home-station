@@ -14,6 +14,7 @@ Implementation TODO list
  - [x] git ignore
  - [x] travis CI
  - [x] protocol definition and generation script in standard PROTOBUF way
+ - [x] migrationg codebase to Python 3.4 from Python 2.7
  - [ ] unit tests
  - [x] runnable code prototype PoC
  - [x] simple socket test client/server example based on PROTO
@@ -69,6 +70,14 @@ message DataMessage {
 ```
 
 
+How to install
+--------------
+
+```
+$ sudo pip3.4 install -r requirements.txt 
+```
+
+
 Example first PRE-ALPHA test runs:
 -------------------
 
@@ -77,17 +86,22 @@ Run on first console client sender test proccess:
 ```
 $ python sender_test.py
 
-token:  222637d764dc605239118043203d6a5a50990354823dee19f4336650df7ff796
+[client] stationId:  0283429873498724283  timestamp:  1469138864
+token:  4dda93cd0cd983157eb733fc6b366d0403b8b8fea67cd3cbba578a0b26113326
+serialized_message:  123
 totallen:  127
-[client] stationId:  0283429873498724283  timestamp:  1447198307
+[client] stationId:  0283429873498724283  timestamp:  1469138864
+serialized_message:  123
 totallen:  127
-[client] stationId:  0283429873498724283  timestamp:  1447198307
+[client] stationId:  0283429873498724283  timestamp:  1469138864
+serialized_message:  123
 totallen:  127
-[client] stationId:  0283429873498724283  timestamp:  1447198307
+[client] stationId:  0283429873498724283  timestamp:  1469138864
+serialized_message:  123
 totallen:  127
-[client] stationId:  0283429873498724283  timestamp:  1447198307
+[client] stationId:  0283429873498724283  timestamp:  1469138864
+serialized_message:  123
 totallen:  127
-[client] stationId:  0283429873498724283  timestamp:  1447198307
 ```
 
 and try run on another console run server collector consumer proccess:
@@ -96,28 +110,32 @@ and try run on another console run server collector consumer proccess:
 $ python collector_test.py
 
 
-Listening
-total_len: 
+[HOME-STATION] Collectorr listening for measurement data...
+total_len:  b'\x00\x00\x00\x7f'
 totallen_recv[0]:  127
 messagelen:  123
-[server] param1: 0283429873498724283 param2: 1447198307
 stationId: "0283429873498724283"
 apiKey: "apiKey"
-token: "222637d764dc605239118043203d6a5a50990354823dee19f4336650df7ff796"
-timestamp: 1447198307
+token: "4dda93cd0cd983157eb733fc6b366d0403b8b8fea67cd3cbba578a0b26113326"
+timestamp: 1469138864
 dataItems {
-  parameterId: 563130
-  value: 11.1000003815
+  parameterId: 590653
+  value: 11.100000381469727
 }
 dataItems {
-  parameterId: 938785
-  value: 22.0200004578
+  parameterId: 822252
+  value: 22.020000457763672
 }
 
 token OK :-)
-[INFO] #### t [s]:  29 m [get data msg count]:  45374
+[INFO] #### t [s]:  92 m [get data msg count]:  181802
 ```
 
-Wow, on local machine with simple sockets server solution performance: *~1.5 k recv messages per second* (45374 [ recv messages] / 29 [s])
 
-Good enough for home automation solution.
+Quasi-performance speed tests info
+----------------------------------
+
+Wow, on local machine with simple sockets server solution performance: *1976 recv messages per second* (181802 [ recv messages] / 92 [s])
+
+Good enough for home automation solution :-)
+
