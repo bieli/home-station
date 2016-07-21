@@ -14,7 +14,7 @@ script:
  - python -m unittest discover ./HomeStation/tests/ "*Test.py"
 
 after_success:
-  coveralls
+  COVERALLS_REPO_TOKEN=On1CE31FvjHFmi3Vg13tPbORVonaxr0aZ coveralls
 
 notifications:
   email: false
