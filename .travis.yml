@@ -9,7 +9,7 @@ install:
  - pip install -r requirements.txt
 
 script:
- - coverage run HomeStation/*/*.py
+ #- coverage run HomeStation/*/*.py
  # - nosetests  --with-coverage --cover-package=./HomeStation/
  #- coverage run --source=HomeStation
  - python -m unittest discover ./HomeStation/tests/ "*Test.py"
