@@ -11,7 +11,7 @@ install:
 script:
  - coverage run HomeStation/*/*.py
  # - nosetests  --with-coverage --cover-package=./HomeStation/
- - coverage run --source=HomeStation test
+ - coverage run --source=HomeStation HomeStation/tests/
  - python -m unittest discover ./HomeStation/tests/ "*Test.py"
 
 after_success:
