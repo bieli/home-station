@@ -177,3 +177,9 @@ Graphical view of performance:
 ![alt text](https://raw.githubusercontent.com/bieli/home-station/master/benchmark_20171015_145020.png)
 
 
+Additionally view of performance with Golang REST/HTTP server (based on Gorilla):
+
+
+![alt text](https://raw.githubusercontent.com/bieli/home-station/master/benchmark_20171015_194125.png)
+
+
