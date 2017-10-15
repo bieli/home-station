@@ -18,9 +18,17 @@ def test_http_json_basehttpserver(benchmark):
     benchmark.pedantic(requests.post, args=(url, payload, {'Content-Type': 'application/json'}), iterations=1000, rounds=100)
     assert 1 == 1
 
-
 def test_http_json_flask(benchmark):
     url = 'http://localhost:8887/api/v1/addrecord/1'
+    payload = {"parameterId": 1, "value": 1.0, "stationId":"0283429873498724283", "apiKey":"", "ts": int(time.time())}
+
+    #r = requests.post(url, json=payload)
+    benchmark.pedantic(requests.post, args=(url, payload, {'Content-Type': 'application/json'}), iterations=1000, rounds=100)
+    assert 1 == 1
+
+# time curl -v -X POST -H "Content-Type: application/json" --data-ascii '{"parameterId": 1, "value": 1.2, "stationId":"0283429873498724283", "apiKey":"", "ts": 123}' http://localhost:8886/api/v1/addrecord/1
+def test_http_json_gorilla_golang(benchmark):
+    url = 'http://localhost:8886/api/v1/addrecord/1'
     payload = {"parameterId": 1, "value": 1.0, "stationId":"0283429873498724283", "apiKey":"", "ts": int(time.time())}
 
     #r = requests.post(url, json=payload)

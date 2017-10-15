@@ -129,7 +129,7 @@ if __name__=='__main__':
     print('HTTP Server Running...........')
     server.start()
     server.waitForThread()
-  except KeyboardInterrupt, e:
-    print "Stop - interrupted by keyboard."
+  except KeyboardInterrupt as e:
+    print("Stop - interrupted by keyboard.")
     server.stop()
 
