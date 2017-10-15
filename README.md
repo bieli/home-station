@@ -132,10 +132,48 @@ token OK :-)
 ```
 
 
-Quasi-performance speed tests info
+Performance servers comparisions
 ----------------------------------
 
-Wow, on local machine with simple sockets server solution performance: *1976 recv messages per second* (181802 [ recv messages] / 92 [s])
+On local machine with simple sockets server solution performance: *1976 recv messages per second* (181802 [ recv messages] / 92 [s])
 
 Good enough for home automation solution :-)
+
+By using BaseHttpServer nad Flask HTTP server in benchamrking we can view how high is performence when we using SOCKETS and PROTOBUF combination.
+
+```
+
+$ py.test sender_test.py --benchmark-histogram
+=================================================================================== test session starts ===================================================================================
+platform linux -- Python 3.4.5, pytest-3.0.6, py-1.4.32, pluggy-0.4.0
+benchmark: 3.1.1 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /home/mbielak/Pulpit/_priv/projects/home-station, inifile: 
+plugins: cov-2.2.1, benchmark-3.1.1, celery-4.0.2
+collected 3 items 
+
+sender_test.py ...
+
+
+------------------------------------------------------------------------------------------------ benchmark: 3 tests ------------------------------------------------------------------------------------------------
+Name (time in us)                        Min                   Max                  Mean              StdDev                Median                 IQR            Outliers         OPS            Rounds  Iterations
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+test_socket_protobuf_custom         496.7924 (1.0)        695.7684 (1.0)        624.7026 (1.0)       40.9030 (1.0)        630.7166 (1.0)       50.6049 (1.0)          26;5  1,600.7616 (1.0)         100        1000
+test_http_json_basehttpserver     2,431.6774 (4.89)     3,101.0362 (4.46)     2,834.8904 (4.54)      95.0810 (2.32)     2,829.8358 (4.49)     103.5050 (2.05)         23;5    352.7473 (0.22)        100        1000
+test_http_json_flask              3,245.0367 (6.53)     4,231.0539 (6.08)     3,885.8517 (6.22)     184.3730 (4.51)     3,892.7702 (6.17)     237.9043 (4.70)         28;2    257.3438 (0.16)        100        1000
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Generated histogram: benchmark_20171015_145020.svg
+Legend:
+  Outliers: 1 Standard Deviation from Mean; 1.5 IQR (InterQuartile Range) from 1st Quartile and 3rd Quartile.
+  OPS: Operations Per Second, computed as 1 / Mean
+====================================================================== 3 passed, 1 pytest-warnings in 735.03 seconds ======================================================================
+
+```
+
+Graphical view of performance:
+
+
+![alt text](https://raw.githubusercontent.com/bieli/home-station/master/benchmark_20171015_145020.png)
+
 
